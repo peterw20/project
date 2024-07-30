@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - My Watches Market</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: url('{{ url_for('static', filename='background2.jpg') }}') center/cover no-repeat;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            animation: backgroundShift 30s linear infinite;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #ff9800, #ff5722);
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: linear-gradient(45deg, #ff5722, #ff9800);
+            transform: scale(1.05);
+            text-shadow: 0 2px 8px rgba(255, 152, 0, 0.7);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-content {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .about-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ff9800;
+        }
+
+        .about-content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 -2px 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('watches') }}">Watches</a></li>
+                <li><a href="{{ url_for('sale') }}">Sale</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-content">
+            <h2>Our Commitment to Excellence</h2>
+            <p>At My Watches Market, we believe that a watch is more than just a tool for telling time; it's a symbol of elegance, craftsmanship, and a personal statement of style. We have curated a collection of the world's finest timepieces, each representing the pinnacle of horological innovation and design.</p>
+            <p>Our mission is to provide our customers with unparalleled quality, exceptional service, and a shopping experience that is both luxurious and personalized. Whether you're a seasoned collector or a first-time buyer, we are here to help you find the perfect watch that suits your taste and lifestyle.</p>
+            <p>Join us on a journey through time and discover the art of watchmaking at its finest. Welcome to My Watches Market.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Watches Market. All rights reserved.</p>
+    </footer>
+</body>
+</html>

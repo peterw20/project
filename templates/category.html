@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brand_name }} Watches</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .button-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 15px; /* Space between buttons */
+        }
+        .nav-button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        .nav-button:hover {
+            background: linear-gradient(135deg, #0056b3, #003d80); /* Darker gradient on hover */
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+        .nav-button:active {
+            background: linear-gradient(135deg, #003d80, #002d60); /* Even darker on click */
+            transform: scale(0.98); /* Slight shrink effect */
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+        }
+        .brand-title {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        .watch-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .watch-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .watch-item {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+        }
+        .watch-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .watch-item h3 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .watch-item p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="button-container">
+            <a href="{{ url_for('home') }}" class="nav-button">Home</a>
+            <a href="{{ url_for('watches') }}" class="nav-button">Watches</a>
+            <a href="{{ url_for('sale') }}" class="nav-button">Sale</a>
+        </div>
+        <h1>{{ brand_name }} Watches</h1>
+    </header>
+    <main>
+        <div class="brand-title">{{ brand_name }}</div>
+        <div class="watch-list">
+            <div class="watch-row">
+                {% for watch in watches[:3] %}
+                <div class="watch-item">
+                    <img src="{{ url_for('static', filename=watch.image) }}" alt="{{ watch.model }}">
+                    <h3>{{ watch.model }}</h3>
+                    <p>${{ watch.price }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="watch-row">
+                {% for watch in watches[3:6] %}
+                <div class="watch-item">
+                    <img src="{{ url_for('static', filename=watch.image) }}" alt="{{ watch.model }}">
+                    <h3>{{ watch.model }}</h3>
+                    <p>${{ watch.price }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Market. All rights reserved.</p>
+    </footer>
+</body>
+</html>

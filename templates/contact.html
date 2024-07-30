@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Watches Market</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0f0f, #292929);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #000;
+            color: #ff9800;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            text-shadow: 0 0 20px rgba(255, 152, 0, 0.8);
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ff9800;
+            font-weight: bold;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        main {
+            padding: 80px 20px;
+            text-align: center;
+            flex: 1;
+        }
+
+        .contact {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 6px 50px rgba(255, 98, 0, 0.6);
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -70px;
+            left: -70px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 98, 0, 0.2);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #ff9800;
+            text-shadow: 0 0 20px rgba(255, 152, 0, 0.8);
+        }
+
+        .contact p {
+            font-size: 1.2em;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .contact ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            font-size: 1.2em;
+        }
+
+        .contact li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact strong {
+            color: #ff9800;
+            margin-right: 10px;
+        }
+
+        .contact a {
+            color: #ff9800;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .contact a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            color: #ff9800;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.6);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        /* Glow animation for the background */
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 98, 0, 0.2), 0 0 20px rgba(255, 98, 0, 0.4), 0 0 30px rgba(255, 98, 0, 0.6), 0 0 40px rgba(255, 98, 0, 0.8), 0 0 50px rgba(255, 98, 0, 1);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 98, 0, 0.2), 0 0 30px rgba(255, 98, 0, 0.4), 0 0 40px rgba(255, 98, 0, 0.6), 0 0 50px rgba(255, 98, 0, 0.8), 0 0 60px rgba(255, 98, 0, 1);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 98, 0, 0.2), 0 0 20px rgba(255, 98, 0, 0.4), 0 0 30px rgba(255, 98, 0, 0.6), 0 0 40px rgba(255, 98, 0, 0.8), 0 0 50px rgba(255, 98, 0, 1);
+            }
+        }
+
+        .contact {
+            animation: glow 2s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('watches') }}">Watches</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="contact">
+            <h2>Get in Touch</h2>
+            <p>We'd love to hear from you! Reach out to us using the information below:</p>
+            <ul>
+                <li><strong>Name:</strong> Peter Wakim</li>
+                <li><strong>Email:</strong> <a href="mailto:peterwakim1@gmail.com">peterwakim1@gmail.com</a></li>
+                <li><strong>Phone Number:</strong> <a href="tel:0555555555">0555555555</a></li>
+                <li><strong>Address:</strong> Tel Aviv, Israel</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Watches Market. All rights reserved.</p>
+    </footer>
+</body>
+</html>

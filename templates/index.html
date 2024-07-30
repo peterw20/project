@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Watches Market</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .auth-buttons {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .auth-buttons a {
+            background-color: #fff;
+            border: none;
+            color: #333;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .auth-buttons a:hover {
+            background-color: #ddd;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 24px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Home page styles */
+        .welcome {
+            height: calc(100vh - 140px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            animation: moveBackground 30s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: 0 50%; }
+            100% { background-position: 1000px 50%; }
+        }
+
+        .hero-content {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .hero-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 10px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+        }
+
+        .watch-display {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            background-color: #f0f0f0;
+        }
+
+        .watch-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            text-align: center;
+            width: 250px;
+            height: 350px; /* Set height to ensure uniform size */
+        }
+
+        .watch-card img {
+            width: 100%;
+            height: 200px; /* Set height to ensure uniform size */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            border-radius: 10px 10px 0 0;
+        }
+
+        .watch-card h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .watch-card p {
+            padding: 0 10px 10px;
+            color: #333;
+        }
+
+        /* New Featured Watches Section */
+        .featured {
+            background-color: #ffffff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .featured h2 {
+            margin-bottom: 20px;
+        }
+
+        .featured-watches {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .featured-watch {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .featured-watch img {
+            width: 100%;
+            height: 150px; /* Set height to ensure uniform size */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            border-radius: 10px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: #f0f0f0;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .testimonial {
+            margin: 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Welcome message */
+        .welcome-message {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Watches Market</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('watches') }}">Watches</a></li>
+                <li><a href="{{ url_for('sale') }}">Sale</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('customize') }}">Customize Your Watch</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <!-- Remove or add 'members' link based on your routes -->
+            </ul>
+            <div class="auth-buttons">
+                {% if session['email'] %}
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </div>
+        </nav>
+        {% if session['name'] %}
+            <p class="welcome-message">Welcome, {{ session['name'] }}</p>
+        {% endif %}
+    </header>
+    <main>
+        <section class="welcome">
+            <div class="hero-content">
+                <h2>Discover a World of Elegance</h2>
+                <p>Explore our curated selection of luxury watches. Find the perfect timepiece that reflects your style and sophistication.</p>
+            </div>
+        </section>
+
+        <section class="watch-display">
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Omega Seamaster.jpg') }}" alt="Omega Seamaster">
+                <h3>Omega Seamaster</h3>
+                <p>The perfect blend of elegance and performance.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Patek Philippe Nautilus.jpg') }}" alt="Patek Philippe Nautilus">
+                <h3>Patek Philippe Nautilus</h3>
+                <p>A timeless icon of luxury and craftsmanship.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='TAG Heuer Carrera.jpg') }}" alt="TAG Heuer Carrera">
+                <h3>TAG Heuer Carrera</h3>
+                <p>Designed for the champions.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Rolex Daytona.jpg') }}" alt="Rolex Daytona">
+                <h3>Rolex Daytona</h3>
+                <p>Unmatched precision and elegance.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Breitling Navitimer.jpg') }}" alt="Breitling Navitimer">
+                <h3>Breitling Navitimer</h3>
+                <p>Aviation-inspired watch with timeless style.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Cartier Tank.jpg') }}" alt="Cartier Tank">
+                <h3>Cartier Tank</h3>
+                <p>Classic design with a modern touch.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Omega Speedmaster.jpg') }}" alt="Omega Speedmaster">
+                <h3>Omega Speedmaster</h3>
+                <p>The ultimate in space exploration.</p>
+            </div>
+            <div class="watch-card">
+                <img src="{{ url_for('static', filename='Hugo Boss Watch.jpg') }}" alt="Hugo Boss Watch">
+                <h3>Hugo Boss Watch</h3>
+                <p>Fashion-forward design with precision.</p>
+            </div>
+        </section>
+
+        <section class="featured">
+            <h2>Featured Watches</h2>
+            <div class="featured-watches">
+                <div class="featured-watch">
+                    <img src="{{ url_for('static', filename='Featured_Watch1.jpg') }}" alt="Featured Watch 1">
+                    <h3>Featured Watch 1</h3>
+                    <p>Exceptional craftsmanship.</p>
+                </div>
+                <div class="featured-watch">
+                    <img src="{{ url_for('static', filename='Featured_Watch2.jpg') }}" alt="Featured Watch 2">
+                    <h3>Featured Watch 2</h3>
+                    <p>Luxury meets precision.</p>
+                </div>
+                <div class="featured-watch">
+                    <img src="{{ url_for('static', filename='Featured_Watch3.jpg') }}" alt="Featured Watch 3">
+                    <h3>Featured Watch 3</h3>
+                    <p>A perfect blend of style and performance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial">
+                <p>"I found the perfect watch for my husband. The customer service was exceptional!"</p>
+            </div>
+            <div class="testimonial">
+                <p>"Amazing selection of watches. I love my new Omega Seamaster!"</p>
+            </div>
+            <div class="testimonial">
+                <p>"Fast shipping and great prices. Highly recommend this store!"</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Market. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">🌐</a>
+            <a href="https://www.instagram.com" target="_blank">📸</a>
+            <a href="https://www.twitter.com" target="_blank">🐦</a>
+            <a href="https://www.linkedin.com" target="_blank">💼</a>
+        </div>
+    </footer>
+</body>
+</html>

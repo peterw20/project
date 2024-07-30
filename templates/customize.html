@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Watch</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .button-container button {
+            background: linear-gradient(135deg, #ff007f, #ff8c00);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 0, 127, 0.5);
+            margin: 0 10px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .button-container button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transition: width 0.3s ease, height 0.3s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .button-container button:hover::before {
+            width: 350%;
+            height: 350%;
+        }
+
+        .button-container button:hover {
+            background: linear-gradient(135deg, #ff8c00, #ff007f);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 0, 127, 0.6);
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #555;
+            border-radius: 10px;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, #ff007f, #ff8c00);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 0, 127, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        button[type="submit"]::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            transition: width 0.3s ease, height 0.3s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        button[type="submit"]:hover::before {
+            width: 350%;
+            height: 350%;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #ff8c00, #ff007f);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 0, 127, 0.6);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const modelSelect = document.getElementById('model');
+            const colorSelect = document.getElementById('color');
+            const innerColorSelect = document.getElementById('inner_color');
+
+            const options = {
+                "Rolex": {
+                    colors: ["gold", "Silver"],
+                    innerColors: ["green", "Blue"]
+                },
+                "Gant": {
+                    colors: ["silver", "Gold"],
+                    innerColors: ["Blue", "green"]
+                },
+                "Patek Philippe": {
+                    colors: ["Black", "Gold"],
+                    innerColors: ["Blue", "White"]
+                },
+                "Boss": {
+                    colors: ["Black", "silver"],
+                    innerColors: ["Blue", "White"]
+                }
+            };
+
+            function updateOptions() {
+                const model = modelSelect.value;
+                const modelOptions = options[model];
+
+                // Update color options
+                colorSelect.innerHTML = "";
+                modelOptions.colors.forEach(color => {
+                    const option = document.createElement('option');
+                    option.value = color;
+                    option.textContent = color;
+                    colorSelect.appendChild(option);
+                });
+
+                // Update inner color options
+                innerColorSelect.innerHTML = "";
+                modelOptions.innerColors.forEach(innerColor => {
+                    const option = document.createElement('option');
+                    option.value = innerColor;
+                    option.textContent = innerColor;
+                    innerColorSelect.appendChild(option);
+                });
+            }
+
+            modelSelect.addEventListener('change', updateOptions);
+
+            // Initialize options on page load
+            updateOptions();
+        });
+    </script>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="window.location.href='{{ url_for('home') }}'">Home</button>
+        <button onclick="window.location.href='{{ url_for('watches') }}'">Watches</button>
+        <button onclick="window.location.href='{{ url_for('contact') }}'">contact</button>
+        <button onclick="window.location.href='{{ url_for('sale') }}'">sale</button>
+    </div>
+    <form action="/confirm" method="POST">
+        <h1>Customize Your Watch</h1>
+        <label for="model">Model:</label>
+        <select id="model" name="model">
+            <option value="Rolex">Rolex</option>
+            <option value="Gant">Gant</option>
+            <option value="Patek Philippe">Patek Philippe</option>
+            <option value="Boss">Boss</option>
+        </select>
+        
+        <label for="color">Color:</label>
+        <select id="color" name="color">
+            <!-- Color options will be dynamically populated -->
+        </select>
+        
+        <label for="inner_color">Inner Color:</label>
+        <select id="inner_color" name="inner_color">
+            <!-- Inner color options will be dynamically populated -->
+        </select>
+        
+        <button type="submit">Confirm</button>
+    </form>
+</body>
+</html>

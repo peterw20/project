@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watches</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .categories {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .category-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .category-item {
+            flex: 1 1 calc(33.33% - 20px);
+            margin: 10px;
+            text-align: center;
+            max-width: 200px;
+        }
+
+        .category-item a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .category-item img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .category-item p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: 768px) {
+            .category-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-item {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .login-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .login-options button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-options .google {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .login-options .facebook {
+            background-color: #3b5998;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Explore Our Watches</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('watches') }}">Watches</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="categories">
+            <h2>Brands</h2>
+            <div class="category-row">
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Gant') }}">
+                        <img src="{{ url_for('static', filename='gant.png') }}" alt="Gant">
+                        <p>Gant</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Boss') }}">
+                        <img src="{{ url_for('static', filename='boss.png') }}" alt="Boss">
+                        <p>Boss</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='AP') }}">
+                        <img src="{{ url_for('static', filename='AP.png') }}" alt="AP">
+                        <p>AP</p>
+                    </a>
+                </div>
+            </div>
+            <div class="category-row">
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Rolex') }}">
+                        <img src="{{ url_for('static', filename='rolex.jpg') }}" alt="Rolex">
+                        <p>Rolex</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Hublot') }}">
+                        <img src="{{ url_for('static', filename='hublot.png') }}" alt="Hublot">
+                        <p>Hublot</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Armani') }}">
+                        <img src="{{ url_for('static', filename='armani.png') }}" alt="Armani">
+                        <p>Armani</p>
+                    </a>
+                </div>
+            </div>
+            <div class="category-row">
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Patek Philippe') }}">
+                        <img src="{{ url_for('static', filename='patek.jpg') }}" alt="Patek Philippe">
+                        <p>Patek Philippe</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Tag Heuer') }}">
+                        <img src="{{ url_for('static', filename='tagheuer.jpg') }}" alt="Tag Heuer">
+                        <p>Tag Heuer</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Tissot') }}">
+                        <img src="{{ url_for('static', filename='tissot.jpg') }}" alt="Tissot">
+                        <p>Tissot</p>
+                    </a>
+                </div>
+            </div>
+            <div class="category-row">
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Citizen') }}">
+                        <img src="{{ url_for('static', filename='citizen.jpg') }}" alt="Citizen">
+                        <p>Citizen</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Seiko') }}">
+                        <img src="{{ url_for('static', filename='seiko.jpg') }}" alt="Seiko">
+                        <p> Grand Seiko</p>
+                    </a>
+                </div>
+                <div class="category-item">
+                    <a href="{{ url_for('brand', brand_name='Omega') }}">
+                        <img src="{{ url_for('static', filename='omega.jpg') }}" alt="Omega">
+                        <p>Omega</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Market. All rights reserved.</p>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="login-options">
+                <button class="google">Connect with Google</button>
+                <button class="facebook">Connect with Facebook</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("loginModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("loginBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

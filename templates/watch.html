@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ watch['model'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>{{ watch['model'] }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('watches') }}">Watches</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="watch-details">
+            <h2>{{ watch['model'] }}</h2>
+            <img src="{{ url_for('static', filename=watch['image']) }}" alt="{{ watch['model'] }}">
+            <p>Price: {{ watch['price'] }}</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Market. All rights reserved.</p>
+    </footer>
+</body>
+</html>
