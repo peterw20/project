@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special 3D Rotating Watches</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/3D.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #000, #333);
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: auto; /* Allow scrolling */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 2em; /* Reduced font size */
+            color: #ffcc00;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+            margin: 20px 0;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #e6b800;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            max-width: 1200px;
+            width: 100%;
+        }
+        .watch-card {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            perspective: 1000px;
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            background: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease-in-out;
+        }
+        .watch-card:hover {
+            transform: scale(1.05);
+        }
+        .watch-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 1s;
+        }
+        .watch-card img.hidden {
+            opacity: 0;
+        }
+        .watch-card:hover img {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .special-message, .end-message {
+            margin: 30px auto;
+            text-align: center;
+            font-size: 1.2em;
+            color: #ffcc00;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            max-width: 900px;
+            width: 100%;
+        }
+        .end-message {
+            margin-top: 50px;
+            font-size: 1em;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <a href="{{ url_for('home') }}" class="button">Go Home</a>
+        <a href="{{ url_for('watches') }}" class="button">View More Watches</a>
+    </div>
+    <h1>Special  Watches</h1>
+    <div class="container">
+        <!-- Watch 1 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch1/watch_01.jpg') }}" alt="Watch 1 Front">
+            <img src="{{ url_for('static', filename='3D/watch1/watch_02.jpg') }}" alt="Watch 1 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch1/watch_03.jpg') }}" alt="Watch 1 Side 1" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch1/watch_04.jpg') }}" alt="Watch 1 Side 2" class="hidden">
+        </div>
+
+        <!-- Watch 2 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch2/watch_01.jpg') }}" alt="Watch 2 Front">
+            <img src="{{ url_for('static', filename='3D/watch2/watch_02.jpg') }}" alt="Watch 2 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch2/watch_03.jpg') }}" alt="Watch 2 Side 1" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch2/watch_04.jpg') }}" alt="Watch 2 Side 2" class="hidden">
+        </div>
+
+        <!-- Watch 3 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch3/watch_01.jpg') }}" alt="Watch 3 Front">
+            <img src="{{ url_for('static', filename='3D/watch3/watch_02.jpg') }}" alt="Watch 3 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch3/watch_03.jpg') }}" alt="Watch 3 Side 1" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch3/watch_04.jpg') }}" alt="Watch 3 Side 2" class="hidden">
+        </div>
+
+        <!-- Watch 4 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch4/watch_01.jpg') }}" alt="Watch 4 Front">
+            <img src="{{ url_for('static', filename='3D/watch4/watch_02.jpg') }}" alt="Watch 4 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch4/watch_03.jpg') }}" alt="Watch 4 Side 1" class="hidden">
+        </div>
+
+        <!-- Watch 5 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch5/watch_01.jpg') }}" alt="Watch 5 Front">
+            <img src="{{ url_for('static', filename='3D/watch5/watch_02.jpg') }}" alt="Watch 5 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch5/watch_03.jpg') }}" alt="Watch 5 Side 1" class="hidden">
+        </div>
+
+        <!-- Watch 6 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch6/watch_01.jpg') }}" alt="Watch 6 Front">
+            <img src="{{ url_for('static', filename='3D/watch6/watch_02.jpg') }}" alt="Watch 6 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch6/watch_03.jpg') }}" alt="Watch 6 Side 1" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch6/watch_04.jpg') }}" alt="Watch 6 Side 2" class="hidden">
+        </div>
+
+        <!-- Watch 7 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch7/watch_01.jpg') }}" alt="Watch 7 Front">
+            <img src="{{ url_for('static', filename='3D/watch7/watch_02.jpg') }}" alt="Watch 7 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch7/watch_03.jpg') }}" alt="Watch 7 Side 1" class="hidden">
+        </div>
+
+        <!-- Watch 8 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch8/watch_01.jpg') }}" alt="Watch 8 Front">
+            <img src="{{ url_for('static', filename='3D/watch8/watch_02.jpg') }}" alt="Watch 8 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch8/watch_03.jpg') }}" alt="Watch 8 Side 1" class="hidden">
+        </div>
+
+        <!-- Watch 9 -->
+        <div class="watch-card" onmouseover="startRotation(this)" onmouseout="stopRotation(this)">
+            <img src="{{ url_for('static', filename='3D/watch9/watch_01.jpg') }}" alt="Watch 9 Front">
+            <img src="{{ url_for('static', filename='3D/watch9/watch_02.jpg') }}" alt="Watch 9 Back" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch9/watch_03.jpg') }}" alt="Watch 9 Side 1" class="hidden">
+            <img src="{{ url_for('static', filename='3D/watch9/watch_04.jpg') }}" alt="Watch 9 Side 2" class="hidden">
+        </div>
+    </div>
+
+    <div class="special-message">
+        <p>Explore our special collection of 3D rotating watches!</p>
+    </div>
+
+    <div class="end-message">
+        <p>Thank you for visiting our watch collection. We hope you enjoyed exploring our unique timepieces. For any inquiries or further information, please feel free to <a href="{{ url_for('contact') }}" style="color: #ffcc00; text-decoration: underline;">contact us</a>.</p>
+    </div>
+
+    <script>
+        function startRotation(card) {
+            const images = card.querySelectorAll('img');
+            let index = 0;
+
+            function showNextImage() {
+                images[index].classList.add('hidden');
+                index = (index + 1) % images.length;
+                images[index].classList.remove('hidden');
+            }
+
+            card.rotationInterval = setInterval(showNextImage, 2000);
+        }
+
+        function stopRotation(card) {
+            clearInterval(card.rotationInterval);
+            card.querySelectorAll('img').forEach(img => img.classList.remove('hidden'));
+        }
+    </script>
+</body>
+</html>
