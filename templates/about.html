@@ -7,24 +7,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        html, body {
             margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Ensures background does not cause extra scroll */
+        }
+
+        body {
             font-family: 'Roboto', sans-serif;
             background: url('{{ url_for('static', filename='backgrounds/background2.jpg') }}') center/cover no-repeat;
             color: white;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            position: relative;
-            animation: backgroundShift 30s linear infinite;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-        }
-
-        @keyframes backgroundShift {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
+            background-attachment: fixed; /* Keeps background fixed while scrolling */
         }
 
         header {
@@ -77,11 +76,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* Overlay to enhance text readability */
         }
 
         .about-content {
             text-align: center;
-            padding: 100px 20px;
+            padding: 50px 20px;
             max-width: 800px;
             margin: 0 auto;
             background: rgba(0, 0, 0, 0.8);
