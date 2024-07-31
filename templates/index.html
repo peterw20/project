@@ -37,7 +37,8 @@
         }
 
         nav ul li {
-            display: inline;
+            display: inline-block;
+            position: relative; /* Add this to position the dropdown */
             margin-right: 20px;
         }
 
@@ -50,6 +51,34 @@
 
         nav ul li a:hover {
             text-decoration: underline;
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0;
+            top: 100%; /* Position it below the parent */
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Show the dropdown content when hovering over the dropdown parent */
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         .auth-buttons {
@@ -236,6 +265,28 @@
             font-size: 18px;
             font-weight: 700;
         }
+
+        /* Enhanced Styles for Sale and Special Buttons */
+        .sale-btn, .special-btn {
+            background: linear-gradient(135deg, #ff9800, #f57c00); /* Gradient background */
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            text-decoration: none; /* Ensure no underline */
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .sale-btn:hover, .special-btn:hover {
+            background: linear-gradient(135deg, #f57c00, #ff9800); /* Reverse gradient on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -244,26 +295,34 @@
         <nav>
             <ul>
                 <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('watches') }}">Watches</a></li>
-                <li><a href="{{ url_for('sale') }}">Sale</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn" id="watches-btn">Watches</a>
+                    <div class="dropdown-content" id="dropdown-menu">
+                        <a href="{{ url_for('watches') }}">Watches</a>
+                        <a href="{{ url_for('customize') }}">Customize Your Watch</a>
+                        <a href="{{ url_for('sale') }}" class="sale-btn">Sale</a>
+                        <a href="{{ url_for('special') }}" class="special-btn">Special</a>
+                    </div>
+                </li>
                 <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                <li><a href="{{ url_for('customize') }}">Customize Your Watch</a></li>
                 <li><a href="{{ url_for('about') }}">About</a></li>
-                <!-- Remove or add 'members' link based on your routes -->
             </ul>
             <div class="auth-buttons">
                 {% if session['email'] %}
                     <a href="{{ url_for('logout') }}">Logout</a>
                 {% else %}
-                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('login') }}" id="loginBtn">Login</a>
                     <a href="{{ url_for('register') }}">Register</a>
                 {% endif %}
             </div>
+            
         </nav>
         {% if session['name'] %}
             <p class="welcome-message">Welcome, {{ session['name'] }}</p>
         {% endif %}
     </header>
+
+
     <main>
         <section class="welcome">
             <div class="hero-content">
