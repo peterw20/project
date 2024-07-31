@@ -275,7 +275,9 @@ def about():
     return render_template('about.html')
 
 
-
+@app.route('/special')
+def special():
+    return render_template('3D.html')
 
 
 if __name__ == '__main__':
